@@ -1,14 +1,16 @@
 # 🍽️ Bistro Restaurant Website
+
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](./images/Home.png)
+![Home Page](./Home.png)
 
 ### 🍴 Menu Page
-![Menu Page](./images/Menu.PNG)
+![Menu Page](./Menu.PNG)
 
 ### 🖼️ Gallery
-![Gallery](./images/Gallery.PNG)
+![Gallery](./Gallery.PNG)
+
 
 
 A fully responsive and dynamic website developed for **Bistro**, a restaurant based in Australia.  
