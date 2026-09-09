@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leaflet Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    #sidebar {
+      position: fixed;
+      left: 10px;
+      top: 50%;
+      z-index: 1000;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 200px;
+    }
+
+    #infoPanel {
+      position: fixed;
+      right: 10px;
+      top: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 300px;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+
+    .btn-block {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="sidebar">
+  <h5>Tasks</h5>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+</div>
+
+<div id="infoPanel">
+  <h5>Feature Info</h5>
+  <div id="infoContent">Click a task to view details.</div>
+</div>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([60.485, 15.431], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+</script>
+
+</body>
+</html>

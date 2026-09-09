@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet Task 4: Image Overlay with Popup</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    img.feature-img {
+      width: 200px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 200px;
+    }
+
+    .btn-block {
+      margin-bottom: 10px;
+    }
+
+    #fullImageOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    #fullImageOverlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    #fullImageOverlay .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div id="sidebar">
+    <h5>Tasks</h5>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+  </div>
+
+  <div id="fullImageOverlay">
+    <span class="close-btn" onclick="closeImage()">×</span>
+    <img src="{{ url_for('static', filename='img/raster.jpg') }}" alt="Full Size Image">
+  </div>
+
+
+  <script>
+    const map = L.map('map').setView([59.3293, 18.0686], 12); 
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const task4url = '/static/img/raster.jpg'; 
+    const task4image = [
+      [59.649726247455845, 17.934279891688984], 
+      [59.64923563251539, 17.93543324161275]     
+    ];
+
+    L.imageOverlay(task4url, task4image).addTo(map);
+
+    const task4picture = L.rectangle(task4image, {
+      color: "#ff7800",
+      weight: 1,
+      opacity: 0,
+      fillOpacity: 0
+    }).addTo(map);
+
+    task4picture.on('click', function () {
+      document.getElementById('fullImageOverlay').style.display = 'flex';
+    });
+
+    function closeImage() {
+      document.getElementById('fullImageOverlay').style.display = 'none';
+    }
+
+    map.fitBounds(task4image);
+  </script>
+
+</body>
+</html>

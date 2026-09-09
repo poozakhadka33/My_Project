@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet Task 5 - Fuel Stations</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <script src="{{ url_for('static', filename='fuel.js') }}"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    #sidebar {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 200px;
+    }
+    #infoPanel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 400px;
+    }
+    .btn-block {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+<div id="sidebar">
+  <h5>Tasks</h5>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+</div>
+
+<div id="infoPanel">
+  <h5>Fuel Station Info</h5>
+  <div id="infoContent">Click a station to view details.</div>
+</div>
+
+<script>
+  const map = L.map('map').setView([59.33, 18.06], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+
+  const task5markers = L.markerClusterGroup();
+  
+
+  const task5fuel = L.geoJSON(fuel, {
+    pointToLayer: function(feature, latlng) {
+      return L.marker(latlng);
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(`<b>${feature.properties.name || 'Unnamed Station'}</b>`);
+
+      layer.on('click', function() {
+        document.getElementById('infoContent').innerHTML = `
+          <h4>${feature.properties.name || 'Unnamed Station'}</h4>
+          <p><strong>Brand:</strong> ${feature.properties.brand || 'N/A'}</p>
+          <p><strong>Location:</strong> ${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]}</p>
+        `;
+      });
+    }
+  });
+
+  task5markers.addLayer(task5fuel);
+  map.addLayer(task5markers);
+  map.fitBounds(task5markers.getBounds());
+</script>
+
+</body>
+</html>

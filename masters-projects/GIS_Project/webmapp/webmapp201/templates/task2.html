@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leaflet Task 2</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+  
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    #infoPanel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 400px;
+    }
+
+    .btn-block {
+      margin-bottom: 10px;
+    }
+
+    img.feature-img {
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div id="sidebar">
+    <h5>Tasks</h5>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+  </div>
+
+  <div id="infoPanel">
+    <h5>Feature Info</h5>
+    <div id="infoContent">Click on a school for more details.</div>
+  </div>
+
+<script>
+  const map = L.map('map').setView([59.33, 18.06], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  const task2measure = L.control.polylineMeasure({
+    position: 'topleft',
+    unit: 'kilometres',
+    showBearings: true,
+    clearMeasurementsOnStop: false,
+    showClearControl: true
+  }).addTo(map);
+
+  const task2school = [
+    { name: "Europaskolan", lat: 59.3131, lng: 18.0770, students: 490, image: "/static/img/euro.jpg" },
+    { name: "Stockholm International School", lat: 59.3391, lng: 18.0659, students: 150, image: "/static/img/stockholminternational.jpg" },
+    { name: "Kungsholmens Gymnasium", lat: 59.3303, lng: 18.0335, students: 180, image: "/static/img/kung.jpg" },
+    { name: "Deutsche Schule Stockholm", lat: 59.3421, lng: 18.0700, students: 220, image: "/static/img/deu.jpg" },
+    { name: "Vasa International School", lat: 59.3441, lng: 18.0569, students: 170, image: "/static/img/vasa_Real.jpg" }
+  ];
+
+  const task2markers = task2school.map(school => {
+    const task2markers = L.marker([school.lat, school.lng]).addTo(map);
+
+    const content = `
+      <h4>${school.name}</h4>
+      <img src="${school.image}" class="feature-img" />
+      <p><strong>Students:</strong> ${school.students}</p>
+      <p><strong>Location:</strong> ${school.lat}, ${school.lng}</p>
+    `;
+
+    task2markers.on('click', () => {
+      document.getElementById("infoContent").innerHTML = content;
+      task2markers.bindPopup(content).openPopup();
+    });
+
+    return task2markers;
+  });
+
+  const task2coords = task2school.map(s => [s.lat, s.lng]);
+
+  map.whenReady(() => {
+    if (typeof task2measure.seed === 'function') {
+      task2measure.seed([task2coords]); 
+    } else {
+      console.warn("PolylineMeasure plugin does not support seed().");
+    }
+  });
+
+  const task2group = L.featureGroup(task2markers);
+  map.fitBounds(task2group.getBounds(), { padding: [50, 50] });
+  
+</script>
+
+</body>
+</html>

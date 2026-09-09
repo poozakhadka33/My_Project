@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather API Task 6</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 50%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 200px;
+    }
+
+    #infoPanel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 400px;
+    }
+
+    img.feature-img {
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .btn-block {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div id="sidebar">
+    <h5>Tasks</h5>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+  </div>
+
+
+  <div id="infoPanel">
+    <h5>Feature Info</h5>
+    <div id="infoContent">Click a city to view weather details.</div>
+  </div>
+
+  <script>
+    const map = L.map('map').setView([59.33, 18.06], 5);  
+
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const task6cities = [
+      { name: "Stockholm", lat: 59.33, lon: 18.06 },
+      { name: "Göteborg", lat: 57.7089, lon: 11.9746 },
+      { name: "Malmö", lat: 55.604, lon: 13.0038 },
+      { name: "Uppsala", lat: 59.8586, lon: 17.6389 },
+      { name: "Västerås", lat: 59.614, lon: 16.543 }
+    ];
+
+    task6cities.forEach(city => {
+      const task6marker = L.marker([city.lat, city.lon])
+        .addTo(map)
+        .on('click', () => task6getWeather(city.name, city.lat, city.lon));  
+    });
+
+    function task6getWeather(cityName, lat, lon) {
+      const apiKey = "127f01db948b4e56b07155626252704";
+      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const task6weather = data.current;
+          const task6weatherInfo = `
+            <h3>${cityName} Weather</h3>
+            <p><strong>Temperature:</strong> ${task6weather.temp_c}°C</p>
+            <p><strong>Condition:</strong> ${task6weather.condition.text}</p>
+            <img src="https:${task6weather.condition.icon}" alt="Weather Icon" width="50">
+            <p><strong>Wind Speed:</strong> ${task6weather.wind_kph} km/h</p>
+            <p><strong>Humidity:</strong> ${task6weather.humidity}%</p>
+          `;
+  
+          document.getElementById("infoContent").innerHTML = task6weatherInfo;
+
+          L.popup()
+            .setLatLng([lat, lon])
+            .setContent(task6weatherInfo)
+            .openOn(map);
+        })
+        .catch(error => {
+          document.getElementById("infoContent").innerHTML = "Failed to load weather data.";
+        });
+    }
+  </script>
+
+</body>
+</html>
