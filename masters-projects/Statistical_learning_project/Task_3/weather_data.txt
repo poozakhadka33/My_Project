@@ -1,0 +1,5 @@
+2024-10-18 12:03:17.001230: [{'site': 'TimeandDate', 'city': 'stockholm', 'temperature': '12°C', 'condition': 'Sunny.'}, {'site': 'Wunderground', 'city': 'stockholm', 'temperature': '62', 'condition': 'Partly Cloudy'}]
+2024-10-18 22:44:11.889756: [{'site': 'TimeandDate', 'city': 'orebro', 'temperature': '9°C', 'condition': 'Passing clouds.'}, {'site': 'Wunderground', 'city': 'orebro', 'temperature': '73', 'condition': 'Cloudy'}]
+2024-10-18 22:45:17.319643: [{'site': 'TimeandDate', 'city': 'gavle', 'temperature': '8°C', 'condition': 'Fog.'}, {'site': 'Wunderground', 'city': 'gavle', 'temperature': '73', 'condition': 'Cloudy'}]
+2024-10-18 22:46:20.739227: [{'site': 'TimeandDate', 'city': 'linkoping', 'temperature': '10°C', 'condition': 'Partly cloudy.'}, {'site': 'Wunderground', 'city': 'linkoping', 'temperature': '73', 'condition': 'Fair'}]
+2025-01-23 21:10:50.512452: [{'site': 'TimeandDate', 'city': 'linkoping', 'temperature': '1°C', 'condition': 'Light snow. Mostly cloudy.'}, {'site': 'Wunderground', 'city': 'linkoping', 'temperature': '64', 'condition': 'Cloudy'}]
