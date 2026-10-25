@@ -1,1 +1,0 @@
-Welcome to my selected data analytics portfolio. This collection showcases academic and independent projects demonstrating my skills in data analysis, business intelligence, machine learning, and data visualization.
