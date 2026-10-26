@@ -1,33 +1,58 @@
-# Selected Data Analysis Projects
+# Airline Passenger Satisfaction — Power BI Dashboard
 
-Welcome to my selected portfolio of data analytics and business intelligence projects. These projects demonstrate my experience in data exploration, machine learning, dashboard development, and communicating insights from data.
+## Project Overview
 
-## 1. Airline Passenger Satisfaction Analysis
+This project presents an interactive Power BI dashboard designed to explore airline passenger satisfaction, service ratings, customer demographics, and operational delays. The dashboard transforms passenger data into visual insights that help users investigate customer experience and compare satisfaction across different passenger segments.
 
-Analysed 129,880 passenger records to explore customer satisfaction patterns and compare machine learning classification models.
+## Project Objectives
 
-**Tools:** Python, pandas, NumPy, scikit-learn
+- Explore passenger satisfaction across customer and travel segments.
+- Analyze service ratings and passenger demographics.
+- Examine patterns related to operational delays and customer experience.
+- Present key performance indicators through interactive visualizations.
+- Enable users to filter and compare results using dashboard interactions.
 
-**Key skills:** Exploratory data analysis, classification, model evaluation, feature importance
+## Tools and Technologies
 
-[**View project →**](./airline-passenger-satisfaction-ml/)
+- **Power BI** — dashboard development and interactive reporting
+- **DAX** — measures and calculations
+- **Data modelling** — organizing data for analysis
+- **Data visualization** — charts, KPIs, slicers, and drill-down analysis
 
-## 2. Airline Passenger Satisfaction — Power BI Dashboard
+## Dashboard Features
 
-Developed an interactive dashboard to explore passenger satisfaction, service ratings, customer segments, and operational delays.
+- Interactive views of passenger satisfaction.
+- Analysis of customer demographics and travel characteristics.
+- Comparison of service ratings across categories.
+- Exploration of operational delays and satisfaction patterns.
+- Slicers and drill-downs to investigate different segments of the dataset.
 
-**Tools:** Power BI, DAX, data modelling, data visualization
+## Analytical Approach
 
-**Key skills:** KPI reporting, interactive filtering, dashboard design, business insights
+The project uses passenger data to examine satisfaction patterns and relationships between customer experience, service ratings, and operational characteristics. Interactive visuals make it easier to explore the data and identify areas that may deserve further investigation.
 
-[**View project →**](./Airline-Passenger-Satisfaction-Power-BI/)
+## Business Value
 
----
+The dashboard demonstrates how business intelligence tools can help transform raw data into accessible information. It can support exploratory analysis of customer experience and help stakeholders identify patterns that may inform service improvement discussions.
 
-## About Me
+## Skills Demonstrated
 
-I am a Data Science graduate interested in using data analytics and business intelligence to support informed decision-making.
+- Power BI dashboard development
+- DAX measures
+- KPI reporting
+- Data modelling
+- Interactive data visualization
+- Customer satisfaction analysis
+- Communicating analytical insights
 
-**Technical interests:** Python, SQL, Power BI, machine learning, statistical analysis, and forecasting.
+## Original Project Files
 
-[LinkedIn](https://www.linkedin.com/in/puja-khadka-0a154b232) | [GitHub Profile](https://github.com/poozakhadka33)
+The original dashboard project is maintained in the `masters-projects` folder of this repository. The link below directs you to the existing project files.
+
+[**View the original Power BI dashboard project on GitHub →**](https://github.com/poozakhadka33/My_Project/tree/main/masters-projects/PowerBI%20dashboard%20analyzing%20Airline%20customer%20satisfaction)
+
+## Author
+
+**Puja Khadka**
+
+[LinkedIn](https://www.linkedin.com/in/puja-khadka-0a154b232) | [GitHub](https://github.com/poozakhadka33)
