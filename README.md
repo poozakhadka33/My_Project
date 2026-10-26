@@ -1,2 +1,1 @@
-# 💼 Work Projects
-This folder contains professional projects I have worked on.
+This folder contains projects I have worked on.
