@@ -1,93 +1,138 @@
-# Car Rental Management System
+![frame_firefox_mac_dark (1)](https://user-images.githubusercontent.com/80502833/187230764-e1bb2b44-c221-4529-ba73-a2261e636372.png)
 
-## Project Overview
+<h1 align="center">Car Rental Website Project</h1>  
 
-The Car Rental Management System is a web-based application designed to support the main activities involved in renting and managing cars. Users can explore the website, register and log in, make car bookings, and cancel bookings. The system also includes car management functionality and pages for feedback and company information.
+This is a project for a car rental website. It is a project for the College Mini Project.
 
-The project combines front-end web technologies with PHP and an SQL database to demonstrate how a website can handle user interactions, booking workflows, and structured data.
+## Table of Contents
 
-## Project Objectives
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Database](#database)
+- [Table](#table)
+- [Car Listing Page](#car-listing-page)
+- [User Story](#user-story)
+- [Admin Page](#admin-page)
+- [Project Report](#project-report)
+- [License](#license)
+- [Demo](#demo)
+- [Authors](#authors)
+- [Show your support](#show-your-support)
 
-- Build a functional website for a car rental service.
-- Implement user registration and login pages.
-- Allow users to book and cancel car rentals.
-- Provide functionality to add and delete car records.
-- Create pages for the home page, About Us, Contact Us, and customer feedback.
-- Connect the website to an SQL database to manage application data.
 
-## Features
+## Introduction
 
-### User Management
-- User registration page.
-- Login page for user access.
+- This is a car rental website project.
+- The purpose of this project is to create a car rental website.
+- The website will have a login page, a car listing page, a car reservation page, and a car return page.
+- The login page will have a username and password input field.
+- The car listing page will have a search bar and a car listing table.
+- The car reservation page will have a car reservation table.
 
-### Car Booking
-- Car rental booking functionality.
-- Booking cancellation functionality.
+## Requirements
 
-### Car Management
-- Add cars to the system.
-- Delete car records.
+- XAMPP is required to run the project.
+- The project will be hosted on a localhost server.
 
-### Website Pages
-- Home page.
-- About Us page.
-- Contact Us page.
-- Customer feedback section.
+##  Installation
 
-### Database Integration
-- SQL database file for the application's data structure and database setup.
-- PHP-based server-side functionality for working with application data.
+- Install XAMPP.
+- Open XAMPP and click on the Start button.
+- Clone the project to the root of the XAMPP server.
+- Open the project in XAMPP.
+- Import SQL file from database folder to the XAMPP server.
+- Open Browser and navigate to [localhost:8080](localhost:8080).
+- Hurray! The project is now running.
 
-## Technologies Used
+##  Database
 
-- **HTML** — website structure
-- **CSS** — styling and layout
-- **JavaScript** — client-side interactivity
-- **PHP** — server-side application logic
-- **SQL** — database structure and data management
+- The database is stored in a folder called database.
+- The database is named as carproject.sql.
+- The database is stored in the root of the XAMPP server.
+- The database is imported to the XAMPP server.
+- Database used is MySQL.
+- Database Connection page is named [connection.php](/connection.php).
 
-## How It Works
+## Table
 
-The website provides pages and functions for users to interact with the car rental service. PHP handles server-side operations, while JavaScript supports client-side interactions. The SQL database stores the information required by the application.
+- The table is named as car.
+- The table has the following columns:
+    - car_id: INTEGER PRIMARY KEY AUTO_INCREMENT
+    - car_make: VARCHAR(255)
+    - car_model: VARCHAR(255)
+    - car_year: INTEGER
+    - car_color: VARCHAR(255)
+    - car_price: INTEGER
+    - car_available: BOOLEAN
+    - car_image: VARCHAR(255)
+    - car_description: VARCHAR(255)
 
-The project brings these technologies together to demonstrate a complete web development workflow, from user-facing pages to server-side processing and database integration.
+##  Car Listing Page
 
-## Key Learning Outcomes
+- The car listing page will have a search bar and a car listing table.
+- The search bar will have a search button.
+- The search button will search for the car based on the search bar input.
+- The car shown only on the car listing page will be the car that is available.
 
-- Developing a multi-page web application.
-- Connecting a PHP application to an SQL database.
-- Implementing user registration and login workflows.
-- Building booking and cancellation functionality.
-- Managing car records through database operations.
-- Organizing front-end, back-end, and database components.
+## User Story
 
-## How to Run
+- As a user, I want to be able to search for a car.
+- As a user, I want to be able to see the car that is available.
+- As a user, I want to be able to reserve a car.
+- As a user, I want to be able to return a car.
+- As a user, I want to be able to see the car that I have reserved.
+- As a user, I want to provide feedback to the car rental website.
+- As a user, I should be able to make payment for the car rental.
 
-The exact setup depends on the PHP database connection and SQL file included in the project.
+## Admin Page
 
-1. Install a local PHP development environment, such as XAMPP, with PHP, a web server, and the database server required by your SQL file.
-2. Clone or download this repository.
-3. Copy the project folder into the appropriate web server directory.
-4. Start the web server and database service.
-5. Import the provided SQL file into the database management tool.
-6. Configure the database connection settings in the PHP files.
-7. Open the application through your local server in a browser.
+- The admin page will have a car listing table.
+- It has a button to add a new car.
+- The button will open a new page where the admin can add a new car.
+- The admin can add a new car by filling in the form.
+- The admin can also delete a car by clicking the delete button.
+- Admin can view user reservation by clicking the view button.
+- Admin can view user return by clicking the view button.
+- Admin can accept or reject a reservation by clicking the accept or reject button.
+- Admin can return a car by clicking the return button.
+- Admin can delete a reservation by clicking the delete button.
+- Admin can view feedback by clicking the view button.
 
-**Note:** Update these instructions to specify the actual database system, database name, and configuration file used in your project.
+## Project Report
 
-## Future Improvements
+- The project report is stored in a folder called [report](https://github.com/Varshithvhegde/car_rental_project/raw/main/report/CarProjectFinalReport.pdf).
+- Report consists of the following:
+    - Introduction
+    - Literature Review
+    - Methodology
+    - Result
+    - Conclusion
+    - References
+- The project report is written in Microsoft Word.
+- The project repot has flow chart, ERD, and UML diagram.
 
-Potential improvements include:
+##  License
 
-- Adding booking validation and car availability checks.
-- Improving form validation and error handling.
-- Strengthening authentication and access controls.
-- Adding booking history and administrative reporting.
-- Improving responsive design for mobile devices.
-- Documenting the database schema and relationships.
+[MIT](https://choosealicense.com/licenses/mit/) © [Varshith Hegde](https://github.com/Varshithvhegde)
+- This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Project Context
+## Demo
 
-This project demonstrates my practical experience with PHP, JavaScript, SQL, and web application development. It helped me explore how user interfaces, server-side logic, and databases work together to support a real-world business process.
+- [Live Deployment](https://carsminiproject.000webhostapp.com/)
+- [Video Demo](https://youtu.be/1Z9Z9Z9Z9Z9)
+
+## Authors 
+
+- [Varshith V Hegde](https://github.com/Varshithvhegde)
+- [Swasthik Jain PM](https://github.com/Swasthik-Jain)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+
+
 
