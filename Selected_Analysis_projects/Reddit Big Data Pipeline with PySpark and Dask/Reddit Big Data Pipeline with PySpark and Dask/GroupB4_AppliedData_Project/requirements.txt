@@ -1,0 +1,14 @@
+##RedditBigDataPipeline
+
+#Requirements
+pandas
+dask==2025.1.0
+distributed==2025.1.0
+pyarrow
+fastparquet
+numpy
+requests
+psutil
+jupyter
+notebook
+matplotlib
