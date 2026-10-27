@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    
+    #sidebar {
+      position: fixed;
+      top: 50%;
+      left: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="sidebar">
+  <h5>Tasks</h5>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+  <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+  
+</div>
+
+<script>
+  let map;
+  let task1Point, task1Line, task1Polygon;
+
+  function initializeTask1() {
+    map = L.map('map').setView([60.485, 15.431], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const icon = L.icon({
+      iconUrl: '/static/img/mark.jpg',
+      iconSize: [32, 37],
+      iconAnchor: [16, 37],
+      popupAnchor: [0, -30]
+    });
+
+    task1Point = L.marker([60.4852327, 15.4317178], { icon })
+      .bindPopup("<h3>Högskolan Dalarna</h3><img src='/static/img/dalarna.jpg' width='250px'>");
+
+    task1Line = L.polyline([
+      [60.4868378, 15.4345408],
+      [60.4861801, 15.4336826],
+      [60.4854144, 15.4323798],
+      [60.4852969, 15.4318020]
+    ], {
+      color: 'blue'
+    }).bindPopup("<h3>Way from Vattugatan2 to Högskolan Dalarna</h3>");
+
+    task1Polygon = L.polygon([
+      [60.4863170, 15.4339950],
+      [60.4868001, 15.4345657],
+      [60.4866444, 15.4353504],
+      [60.4862216, 15.4343573]
+    ], {
+      color: 'red',
+      fillColor: 'red',
+      fillOpacity: 0.4
+    }).bindPopup("<h3>ARC Fastighetspartner AB</h3><img src='/static/img/vattugatan2.jpg' width='200px'>");
+
+    task1Point.addTo(map);
+    task1Line.addTo(map);
+    task1Polygon.addTo(map);
+
+    const group = L.featureGroup([task1Point, task1Line, task1Polygon]);
+    map.fitBounds(group.getBounds(), { padding: [50, 50] });
+  }
+
+  window.onload = function() {
+    initializeTask1();
+  };
+</script>
+
+</body>
+</html>

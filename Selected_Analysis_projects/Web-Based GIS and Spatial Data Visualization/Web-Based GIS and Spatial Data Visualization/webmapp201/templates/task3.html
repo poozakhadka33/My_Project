@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet Task 3</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='supermarket.js') }}"></script>
+  <script src="{{ url_for('static', filename='turf.min.js') }}"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+     
+    }
+
+    #infoPanel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 400px;
+    }
+
+    .btn-block {
+      margin-bottom: 10px;
+    }
+
+    img.feature-img {
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div id="sidebar">
+    <h5>Tasks</h5>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task1') }}'">Task 1</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task2') }}'">Task 2</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task3') }}'">Task 3</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task4') }}'">Task 4</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task5') }}'">Task 5</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task6') }}'">Task 6</button>
+    <button class="btn btn-success btn-block" onclick="location.href='{{ url_for('task7') }}'">Task 7</button>
+  </div>
+
+  <div id="infoPanel">
+    <h5>Supermarket Info</h5>
+    <div id="infoContent">Click a supermarket to view details.</div>
+  </div>
+
+  <script>
+    const map = L.map('map').setView([59.33, 18.06], 12);
+  
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+  
+    const task3marker = L.geoJSON(supermarket, {
+      onEachFeature: function (feature, layer) {
+        layer.on('click', function () {
+          const props = feature.properties;
+          const coordinates = layer.getLatLng();
+          const content = `
+            <h4>${props.name || 'Unnamed Supermarket'}</h4>
+            <p><strong>Shop:</strong> ${props.shop || 'N/A'}</p>
+            <p><strong>Location:</strong> Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}</p>
+          `;
+          document.getElementById('infoContent').innerHTML = content;
+          layer.bindPopup(content).openPopup();
+        });
+      },
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng);
+      }
+    }).addTo(map);
+  
+    map.fitBounds(task3marker.getBounds());
+  
+
+    const buffers = [];
+  
+      supermarket.features.forEach(function (feature) {
+      const task3coords = feature.geometry.coordinates;
+      const task3point = turf.point(task3coords);
+      const task3buffered = turf.buffer(task3point, 1.0, { units: 'kilometers' });
+  
+      buffers.push({ feature, buffered: task3buffered });
+  
+      L.geoJSON(task3buffered, {
+        style: {
+          color: 'green',
+          weight: 1,
+          fillColor: 'lightpink',
+          fillOpacity: 0.2
+        }
+      }).addTo(map);
+    });
+  
+    buffers.forEach((current, i) => {
+      let overlaps = false;
+  
+      for (let j = 0; j < buffers.length; j++) {
+        if (i !== j && turf.booleanOverlap(current.buffered, buffers[j].buffered)) {
+          overlaps = true;
+          break;
+        }
+      }
+  
+      if (!overlaps) {
+        L.geoJSON(current.buffered, {
+          style: {
+            color: 'red',
+            weight: 2,
+            fillColor: 'lightblue',
+            fillOpacity: 0.4
+          }
+        }).addTo(map);
+      }
+    });
+  </script>
+  </body>
+</html>
